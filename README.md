@@ -2,6 +2,16 @@
     // under construction //
 ```
 
+```
+project status:
+    [ ] alpha conception
+        [x] theorizing
+        [ ] implementing
+    [ ] beta testing and revising code
+    [ ] gamma release
+```
+
+
 # SVM Suite instructions
 
 Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for automated reasoning and human-computer interaction. *SVM Suite* includes a set of service virtual machines (SVM) built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between services that perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
