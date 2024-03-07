@@ -171,9 +171,11 @@ In this section, we presented a simple router SVM for directing messages between
 
 ## 2. console.svm
 
-*Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, an `input` message with relevant data is emitted. Output to the console is managed by sending an `output` message with relevant data from the parent router. To see initial examples of using consoles, please refer to the [router.svm](#1-router-svm) section.
+*Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, an `input` message with relevant data is emitted. Output to the console is managed by sending an `output` message with relevant data from the parent router. Console service doesn't require any underlying code specific to a particular instance for its functionality.
 
-When a console service is running, it is possible to change its prompt label like in the following example:
+To see initial examples of using consoles, please refer to the [router.svm](#1-router-svm) section.
+
+When a console service is running, it is possible to change its prompt label by sending it an `prompt` message like in the following example:
 
     ...
     (
