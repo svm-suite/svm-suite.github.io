@@ -181,10 +181,10 @@ When a console service is running, it is possible to change its prompt label by 
     ...
     (
         DIRECT
-        (LISTEN (SOURCE start) (DATA rt1))
+        (LISTEN (SOURCE start) (DATA cns1))
         (
             INVOKE
-            (TARGET rt1)
+            (TARGET cns1)
             (DATA (prompt "user>"))
         )
     )
@@ -196,7 +196,7 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 ## 3. stateful.svm
 
-*stateful.svm* is planned to be a service virtual machine providing state operations and computing data. Data computed using states may be stored in temporary or permanent data storage in computer memory.
+*Stateful.svm* is planned to be a service virtual machine providing state operations and computing data. Data computed using states may be stored in temporary or permanent data storage in computer memory.
 
     (
         COMPUTE
@@ -214,7 +214,7 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 ## 4. stateless.svm
 
-*stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations may be suitable to perform automated reasoning tasks.
+*Stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations may be suitable to perform automated reasoning tasks.
 
     (
         RULE
