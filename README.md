@@ -106,7 +106,7 @@ To resume, if the above two examples are coded in the same router, they start `c
 
 ### 2.2. passing messages between SVMs
 
-When services are up and running, they receive and emit their input and output messages. To direct and pass around these messages, we use the same pattern from the previous examples. For example, we may have started two services of a type `console.svm` named `cns1` and `cns2`. If we wanted to make, say, a chat system out of them, these two services may be paired in a router to output what the other service inputs while end users are typing to their interfaces. To begin with the creation of such a system, let's start from a simple indicator of whether the users input a letter `A` into consoles. Such system would contain the following code:
+When services are up and running, they receive and emit their input and output messages. To direct and pass around these messages, we use the same pattern from the previous examples. For example, we may have started two services of a type `console.svm` named `cns1` and `cns2`. If we wanted to make, say, a chat system out of them, these two services may be paired in a router to output what the other service inputs while users are typing to their interfaces. To begin with the creation of such a system, let's start from a simple indicator of whether the users input a letter `A` into consoles. Such system would contain the following code:
 
 ```
 ...
@@ -123,7 +123,7 @@ When services are up and running, they receive and emit their input and output m
 ...
 ```
 
-Note how we use data parameters `input` and `output` specific to console instances. Now the both consoles are able to input any text from users, indicating the other user on typing a letter `A`. Of course, this code can hardly be of any use, but we will introduce some new constructs to our router code, namely sections `MATCH` and `VAR`. Now, we may find the router capable enough not only to program our chat system, but also for many other purposes. This is how we could write the code for our chat system: 
+Note how we use data parameters `input` and `output` specific to console instances. Now the both consoles are able to input any text from users, indicating the other user only on typing a letter `A`. Of course, this code can hardly be of any use, but we will introduce some new constructs to our router code, namely sections `MATCH` and `VAR`. Now, we may find the router capable enough not only to program our chat system, but also for many other purposes. This is how we could write the code for our chat system: 
 
 ```
 ...
@@ -192,7 +192,7 @@ In this section, we presented a simple router SVM for directing messages between
 
 *Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, the service emits an `input` message with relevant data. Output to the console is managed by sending an `output` message with relevant data to the service. Console service doesn't require any underlying code specific to a particular instance for its functionality.
 
-To see initial examples of using consoles, please refer to the [1. router.svm](#1-routersvm) section.
+To see initial examples of using consoles, please refer to the [2. router.svm](#2-routersvm) section.
 
 During a console service runtime, it is possible to change its prompt label by sending it a `prompt` message like in the following example:
 
@@ -267,11 +267,11 @@ All programs in *compute-stateful.svm* are written by the following pattern:
 )
 ```
 
-We can notice discrete `COMPUTE` steps which pair the current step `STATE` and `INPUT` against the next step `STATE` and `OUTPUT`. `INPUT` and `OUTPUT` sections are optional in any computing step. The `start` and `stop` states can not change memory cells, and can only input and output `DATA`, respectively. All the states in between may read and write their `INPUT` and `OUTPUT` data from temporary (`TEMP`) or permanent (`PERM`) memory cells. Each `STATE` section holds a name of the state, each `TEMP` or `PERM` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
+We can notice discrete `COMPUTE` steps which pair the current step `STATE` and `INPUT` against the next step `STATE` and `OUTPUT`. `INPUT` and `OUTPUT` sections are optional in any computing step. The `start` and `stop` states can not change memory cells, and can only input and output `DATA`, respectively, defining the current service instance. All the states in between may read and write their `INPUT` and `OUTPUT` data from temporary `TEMP` or permanent `PERM` memory cells. Each `STATE` section holds a name of the state, each `TEMP` or `PERM` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
 
 ### 4.1. temporary data storage
 
-Data in *compute-stateful.svm* is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their content is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
+Data in *compute-stateful.svm* is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their data is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
 
 The next example:
 
@@ -321,14 +321,14 @@ takes no start parameters because of the absence of `INPUT` section in `start` s
 
 - after reaching state `start`, we store the atom `fst` in memory cell `X`
 - after reaching state `1`, we store the atom `snd` in memory cell `Y`
-- after reaching state `2`, we store the expression `(fst snd)` in memory cell `Z`. This is done by using `temp` sections to refer to memory cells `X` and `Y`
+- after reaching state `2`, we store the expression `(fst snd)` in memory cell `Z`. This is done by using `temp` sections to refer to memory cells named `X` and `Y`
 - after reaching state `3`, we `stop` the service outputting the contents of memory cell `Z` 
 
 Computing processes using only temporary storage are [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) from the world outside of the processes.
 
 ### 4.2. permanent data storage
 
-Permanent memory cells are noted by `PERM` sections, and they live forever, or until their content is set to `NIL`. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
+Permanent memory cells are noted by `PERM` sections, and they live forever, or until their data is set to `NIL`. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
 
 The next example:
 
@@ -374,11 +374,11 @@ The next example:
 )
 ```
 
-is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Permanent data storage introduces referential opaqueness from the outside world of the process.
+is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
 
 ### 4.3. pattern matching
 
-We can also define multiple `COMPUTE` steps with the same `CURRENT` state which may introduce possible branching choices. In such case, as the next computing step, *compute-stateful.svm* chooses to ignite the first available step from the top of the code, whose `INPUT` matches against the memory cell contents. Thus, the example:
+We can also define multiple `COMPUTE` steps with the same `CURRENT` state which may introduce possible branching choices. When the next computing step may land at multiple steps, *compute-stateful.svm* service chooses to select the first available step with the same name, from the top of the code, whose `INPUT` matches against the memory cell contents. Thus, the example:
 
 ```
 (
@@ -423,11 +423,11 @@ We can also define multiple `COMPUTE` steps with the same `CURRENT` state which 
     )
 ```
 
-outputs the atom `choice two`. Constructs like this may also be useful when we implement loops by employing circular references. In such cases, branching choices save us from infinite loops.
+outputs the atom `choice two`. Constructs like this may also be useful when we implement loops by employing circular references. In such cases, branching choices may save us from infinite loops.
 
 ### 4.4. service input parameters
 
-Naturally *compute-stateful.svm* can have input, and we note such inputs in `INPUT` section that is paired with the `start` state. The following example:
+Naturally, like it can have an output paired with the `stop` state, *compute-stateful.svm* service can have an input, and we note such input in `INPUT` section paired with the `start` state. The following example:
 
 ```
 (
@@ -451,7 +451,7 @@ outputs `password is correct` if the parameter passed to the example input is ex
 
 ### 4.5. variables
 
-Similarly to *router.svm* code, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
+Similarly to *router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
 
 ```
 (
@@ -478,11 +478,11 @@ Similarly to *router.svm* code, we may want to make use of variables. In a simil
 )
 ```
 
-The above example inputs s-expression of two elements, and outputs them in swapped position. Let's declare this example as saved in a file `swap.svm` to reuse it in the following section.
+The above example inputs s-expression of two elements, and outputs them in swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
 
 ### 4.6. modularity
 
-Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by declaring them in `IMPORT` sections:
+Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
 
 ```
 (
@@ -510,13 +510,17 @@ Defining computing streams may become very complex. To tackle this problem, each
 )
 ```
 
-The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services code.
+The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
 
 ### 4.7. conclusion
 
 In this section we learned basic constructs of *compute-stateful.svm* services. We only scratched the surface of what such services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
 
 ## 5. compute-stateless.svm
+
+```
+// work in progress //
+```
 
 *Compute-stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations, using this service, may be suitable to perform automated reasoning tasks.
 
