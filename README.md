@@ -23,13 +23,11 @@ project status:
         - [x] [2.4 conclusion](#24-conclusion)
     - [x] [3. console.svm](#3-consolesvm)
     - [x] [4. compute-stateful.svm](#4-compute-statefulsvm)
-        - [x] [4.1. temporary data storage](#41-temporary-data-storage)
-        - [x] [4.2. permanent data storage](#42-permanent-data-storage)
-        - [x] [4.3. pattern matching](#43-pattern-matching)
-        - [x] [4.4. service input parameters](#44-service-input-parameters)
-        - [x] [4.5. variables](#45-variables)
-        - [x] [4.6. modularity](#46-modularity)
-        - [x] [4.7. conclusion](#47-conclusion)
+        - [x] [4.1. temporary and permanent data storage](#41-temporary-and-permanent-data-storage)
+        - [x] [4.2. pattern matching](#42-pattern-matching)
+        - [x] [4.3. variables](#43-variables)
+        - [x] [4.4. modularity](#44-modularity)
+        - [x] [4.5. conclusion](#45-conclusion)
     - [ ] [5. compute-stateless.svm](#5-compute-statelesssvm)
 
 # SVM Suite instructions
@@ -289,7 +287,9 @@ All programs in *compute-stateful.svm* are written by the following pattern:
 
 We can notice discrete `COMPUTE` steps which pair the current step `STATE` and `INPUT` against the next step `STATE` and `OUTPUT`. `INPUT` and `OUTPUT` sections are optional in any computing step. The `start` and `stop` states can not change memory cells, and can only input and output `DATA`, respectively, defining the current service instance. All the states in between may read and write their `INPUT` and `OUTPUT` data from temporary `TEMP` or permanent `PERM` memory cells. Each `STATE` section holds a name of the state, each `TEMP` or `PERM` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
 
-### 4.1. temporary data storage
+### 4.1. temporary and permanent data storage
+
+**temporary data storage**
 
 Data in *compute-stateful.svm* is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their data is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
 
@@ -346,7 +346,7 @@ takes no start parameters because of the absence of `INPUT` section in `start` s
 
 Computing processes using only temporary storage are [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) from the world outside of the processes.
 
-### 4.2. permanent data storage
+**permanent data storage**
 
 Permanent memory cells are noted by `PERM` sections, and they live forever, or until their data is set to `NIL`. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
 
@@ -396,7 +396,7 @@ The next example:
 
 is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
 
-### 4.3. pattern matching
+### 4.2. pattern matching
 
 We can also define multiple `COMPUTE` steps with the same `CURRENT` state which may introduce possible branching choices. When the next computing step may land at multiple steps, *compute-stateful.svm* service chooses to select the first available step with the same name, from the top of the code, whose `INPUT` matches against the memory cell contents. Thus, the example:
 
@@ -445,31 +445,7 @@ We can also define multiple `COMPUTE` steps with the same `CURRENT` state which 
 
 outputs the atom `choice two`. Constructs like this may also be useful when we implement loops by employing circular references. In such cases, branching choices may save us from infinite loops.
 
-### 4.4. service input parameters
-
-Naturally, like it can have an output paired with the `stop` state, *compute-stateful.svm* service can have an input, and we note such input in `INPUT` section paired with the `start` state. The following example:
-
-```
-(
-    STATEFUL
-    (
-        COMPUTE
-        (
-            CURRENT
-            (STATE start)
-            (INPUT (DATA pass123))
-        )
-        (
-            NEXT
-            (STATE stop)
-            (OUTPUT (DATA "password is correct"))
-        )
-    )
-)
-```
-outputs `password is correct` if the parameter passed to the example input is exactly the atom `pass123`. In the case of any other input, an error is raised.
-
-### 4.5. variables
+### 4.3. variables
 
 Similarly to *router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
 
@@ -500,7 +476,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
 
 The above example inputs s-expression of two elements, and outputs them in swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
 
-### 4.6. modularity
+### 4.4. modularity
 
 Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
 
@@ -532,7 +508,7 @@ Defining computing streams may become very complex. To tackle this problem, each
 
 The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
 
-### 4.7. conclusion
+### 4.5. conclusion
 
 In this section we learned basic constructs of *compute-stateful.svm* services. We only scratched the surface of what such services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
 
