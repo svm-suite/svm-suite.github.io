@@ -16,9 +16,9 @@ project status:
 
 Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for automated reasoning and human-computer interaction. *SVM Suite* includes a set of service virtual machines (SVM) built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between services that perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
 
-Some examples that may be represented as services are RAM, permanent storage, screen, keyboard and mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, operating system, or maybe even enthusiastic self-controlling hardware system driven by artificial intelligence empowered form of existential being.
+Some examples that may be represented as services are RAM, permanent storage, keyboard or mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, operating system, or maybe even enthusiastic self-controlling hardware system driven by artificial intelligence empowered form of existential being.
 
-Minimal viable product of *SVM Suite* includes four services called virtual service machines, namely: *router.svm*, *console.svm*, *compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration.
+Minimal viable product of *SVM Suite* includes four services called service virtual machines. Central, *router.svm* mediates between *console.svm*, *compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar services in the future.
 
 > *Note that all the code and exchanged data in SVM Suite services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. Ingenious s-expression form is chosen because of its very convenient properties relating to code related tasks.*
 
@@ -139,15 +139,55 @@ Of course, we may use any number of variables in the `DATA` section, and we can 
 
 To achieve modularity of a router, we may also start other router SVMs from the root one, stacking them in the hierarchical structure. Such modularity may be proven to be useful in more complicated systems where we may want to isolate passing messages of the same sort.
 
+To start a new router, we may write:
+
+    ...
+    (
+        DIRECT
+        (LISTEN (SOURCE start) (DATA this))
+        (
+            INVOKE
+            (TARGET start)
+            (
+                DATA
+                (
+                    SERVICE
+                    (TYPE router.svm)
+                    (NAME rt1)
+                    (PARAMS (file "rt1.svm"))
+                )
+            )
+        )
+    )
+    ...
+
+Using this code, we start a router coded in file `rt1.svm`.
+
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a root node router, thus making use of their modularity.
 
 ### 1.4 conclusion
 
-In this section, we presented a simple router SVM for directing messages between other SVMs. Being a glue element, *router.svm* takes a central space among all the SVMs in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* to perform different tasks of the interest.
+In this section, we presented a simple router SVM for directing messages between other SVMs. Being a SVMs glue element, *router.svm* takes a central role among all the SVMs in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* to perform different tasks of interest.
 
 ## 2. console.svm
 
-*console.svm* is planned to be a simple service virtual machine providing textual console input/output.
+*console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, an `input` message with relevant data is emitted. Output to the console is managed by sending an `output` message with relevant data from the parent router. To see initial examples of using consoles, please refer to the [router.svm](#1-router-svm) section.
+
+When a console service is running, it is possible to change its prompt label like in the following example:
+
+    ...
+    (
+        DIRECT
+        (LISTEN (SOURCE start) (DATA rt1))
+        (
+            INVOKE
+            (TARGET rt1)
+            (DATA (prompt "user>"))
+        )
+    )
+    ...
+
+This code sets the prompt of the console to `user>` label when the console service starts.
 
 ## 3. stateful.svm
 
