@@ -189,7 +189,7 @@ When a console service is running, it is possible to change its prompt label lik
 
 This code sets the prompt of the console to `user>` label when the console service starts.
 
-*Console.svm` is intended to be a default input/output interface to *SVM Suite* based applications. In the case of creating a chatbot, beside the basic question/answer interface, consoles can be used for monitoring intermediate thought processes, as we may output a stream of thought during the data computing process.
+*Console.svm* is intended to be a default input/output interface to *SVM Suite* based applications. In the case of creating a chatbot, beside the basic question/answer interface, consoles can be used for monitoring intermediate thought processes, as we may output a stream of thought during the data computing process.
 
 ## 3. stateful.svm
 
