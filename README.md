@@ -5,7 +5,7 @@
 ```
 project status:
     [ ] alpha conception
-        [x] theorizing
+        [ ] theorizing
         [ ] implementing
     [ ] beta testing and revising code
     [ ] gamma release
@@ -175,7 +175,7 @@ In this section, we presented a simple router SVM for directing messages between
 
 To see initial examples of using consoles, please refer to the [router.svm](#1-router-svm) section.
 
-When a console service is running, it is possible to change its prompt label by sending it an `prompt` message like in the following example:
+When a console service is running, it is possible to change its prompt label by sending it a `prompt` message like in the following example:
 
     ...
     (
