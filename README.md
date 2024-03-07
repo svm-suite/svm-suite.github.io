@@ -1,4 +1,6 @@
 ```
+// work in progress //
+
 project status:
     [ ] alpha conception
         [x] initiating the idea
@@ -6,10 +8,6 @@ project status:
         [ ] implementing
     [ ] beta testing and revising code
     [ ] gamma release
-```
-
-```
-// work in progress //
 ```
 
 #### TOC
