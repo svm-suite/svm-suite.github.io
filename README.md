@@ -510,7 +510,7 @@ The above example also outputs swapped input s-expression of two elements, but n
 
 ### 4.5. conclusion
 
-In this section we learned basic constructs of *compute-stateful.svm* services. We only scratched the surface of what such services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
+In this section we exposed basic constructs of *compute-stateful.svm* services. We only scratched the surface of what such services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
 
 ## 5. compute-stateless.svm
 
