@@ -172,11 +172,11 @@ In this section, we presented a simple router SVM for directing messages between
 
 ## 2. console.svm
 
-*Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, an `input` message with relevant data is emitted. Output to the console is managed by sending an `output` message with relevant data from the parent router. Console service doesn't require any underlying code specific to a particular instance for its functionality.
+*Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, the service emits an `input` message with relevant data. Output to the console is managed by sending an `output` message with relevant data to the service. Console service doesn't require any underlying code specific to a particular instance for its functionality.
 
 To see initial examples of using consoles, please refer to the [1. router.svm](#1-routersvm) section.
 
-When a console service is running, it is possible to change its prompt label by sending it a `prompt` message like in the following example:
+During a console service runtime, it is possible to change its prompt label by sending it a `prompt` message like in the following example:
 
     ...
     (
@@ -192,7 +192,7 @@ When a console service is running, it is possible to change its prompt label by 
 
 This code sets the prompt of the console to `user>` label when the console service starts.
 
-*Console.svm* is intended to be a default input/output interface to *SVM Suite* based applications. In the case of creating a chatbot, beside the basic question/answer interface, consoles can be used for monitoring intermediate thought processes, as we may output a stream of thought during the data computing process.
+*Console.svm* is intended to be a default input/output interface to *SVM Suite* based applications. In the case of creating a chatbot, beside the basic conversational interface, consoles can be used for monitoring intermediate thought processes, as we may output a stream of thought during the data computing process.
 
 ## 3. stateful.svm
 
