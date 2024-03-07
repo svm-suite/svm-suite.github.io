@@ -20,7 +20,7 @@ project status:
         - [x] [2.1. starting and stopping services](#21-starting-and-stopping-services)
         - [x] [2.2. passing messages between services](#22-passing-messages-between-services)
         - [x] [2.3. modularity](#23-modularity)
-        - [x] [2.4 conclusion](#24-conclusion)
+        - [x] [2.4. conclusion](#24-conclusion)
     - [x] [3. console.svm](#3-consolesvm)
     - [x] [4. compute-stateful.svm](#4-compute-statefulsvm)
         - [x] [4.1. temporary and permanent data storage](#41-temporary-and-permanent-data-storage)
