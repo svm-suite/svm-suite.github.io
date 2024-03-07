@@ -5,6 +5,7 @@
 ```
 project status:
     [ ] alpha conception
+        [x] initiating the idea
         [ ] theorizing
         [ ] implementing
     [ ] beta testing and revising code
