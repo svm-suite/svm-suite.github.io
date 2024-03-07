@@ -12,6 +12,26 @@ project status:
 // work in progress //
 ```
 
+#### TOC
+
+- [ ] [SVM Suite instructions](#svm-suite-instructions)
+    - [ ] [1. local installation](#1-local-installation)
+    - [x] [2. router.svm](#2-routersvm)
+        - [x] [2.1. starting and stopping services](#21-starting-and-stopping-services)
+        - [x] [2.2. passing messages between services](#22-passing-messages-between-services)
+        - [x] [2.3. modularity](#23-modularity)
+        - [x] [2.4 conclusion](#24-conclusion)
+    - [x] [3. console.svm](#3-consolesvm)
+    - [x] [4. compute-stateful.svm](#4-compute-statefulsvm)
+        - [x] [4.1. temporary data storage](#41-temporary-data-storage)
+        - [x] [4.2. permanent data storage](#42-permanent-data-storage)
+        - [x] [4.3. pattern matching](#43-pattern-matching)
+        - [x] [4.4. service input parameters](#44-service-input-parameters)
+        - [x] [4.5. variables](#45-variables)
+        - [x] [4.6. modularity](#46-modularity)
+        - [x] [4.7. conclusion](#47-conclusion)
+    - [ ] [5. compute-stateless.svm](#5-compute-statelesssvm)
+
 # SVM Suite instructions
 
 Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for automated reasoning and human-computer interaction. *SVM Suite* includes a set of service virtual machines (SVM) built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between services that perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
@@ -52,7 +72,7 @@ The following code pattern would give an insight to what a router code would loo
 
 In this manner, the router directs messages from one service to another. Each `SOURCE` and `TARGET` section hold a service name, while each `DATA` section holds a s-expression.
 
-### 2.1. starting and stopping SVMs
+### 2.1. starting and stopping services
 
 Each service has its lifetime during which it sends or receives messages. Services begin their lifetimes using always active built-in service `start`, while they end using also always active built-in service `stop`. When services start or stop, they emit related messages that can be caught by the router. Given that the router service is already running, in such a way, we can intercept a starting or stopping service named `this` denoting the current router. On interception of such messages, we can start or stop other services, which would be the root point of our service management.
 
@@ -104,7 +124,7 @@ stops service named `cns1` when `this` is being stopped.
 
 To resume, if the above two examples are coded in the same router, they start `cns1` service when the router lifetime begins, and stop it when the router lifetime ends.
 
-### 2.2. passing messages between SVMs
+### 2.2. passing messages between services
 
 When services are up and running, they receive and emit their input and output messages. To direct and pass around these messages, we use the same pattern from the previous examples. For example, we may have started two services of a type `console.svm` named `cns1` and `cns2`. If we wanted to make, say, a chat system out of them, these two services may be paired in a router to output what the other service inputs while users are typing to their interfaces. To begin with the creation of such a system, let's start from a simple indicator of whether the users input a letter `A` into consoles. Such system would contain the following code:
 
