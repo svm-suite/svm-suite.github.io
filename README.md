@@ -379,7 +379,7 @@ The next example:
 )
 ```
 
-is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
+is completely analogous to the one in [temporary data storage] section. The only difference is that we use permanent storage cells instead of temporary ones. Such use stores data in the file system, while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
 
 ##### 1.2.2. pattern matching
 
