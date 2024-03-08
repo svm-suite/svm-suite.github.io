@@ -26,7 +26,7 @@ project status:
         - [x] [1. theoretical background](#1-theoretical-background)
             - [x] [1.1. syntax](#11-syntax)
             - [x] [1.2. semantics](#12-semantics)
-                - [x] [1.2.1 temporary and permanent data storage](#121-temporary-and-permanent-data-storage)
+                - [x] [1.2.1. temporary and permanent data storage](#121-temporary-and-permanent-data-storage)
                 - [x] [1.2.2. pattern matching](#122-pattern-matching)
                 - [x] [1.2.3. variables](#123-variables)
                 - [x] [1.2.4. modularity](#124-modularity)
@@ -36,11 +36,11 @@ project status:
 
 # SVM Suite instructions
 
-Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for human-computer interaction and automated reasoning. *SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between services that perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
+Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for human-computer interaction and automated reasoning. *SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between services dedicated to perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
 
 Some examples that may be represented as services are RAM, permanent storage, keyboard or mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, operating system, or maybe even enthusiastic self-controlling hardware system driven by artificial intelligence empowered form of existential being.
 
-Minimal viable product of *SVM Suite* includes four services called service virtual machines. Central, *router.svm* mediates between *console.svm*, *compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar services in the future.
+Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *router.svm* mediates between *console.svm*, *compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future.
 
 > Note that all the code and exchanged data in *SVM Suite* services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. Ingenious s-expression form is chosen because of its very convenient properties relating to code related tasks.
 
@@ -99,7 +99,7 @@ There are several key points in starting a service, which we will analyze in the
 ...
 ```
 
-First, we listen to the start of `this` service. Thus, when the router starts, we invoke the start of a service of type `console.svm`, named `cns1`, providing some additional parameters. When the console service starts, in further message passing, we will refer to the console by its assigned name `cns1`. Note that we can start any number of instances of the same service type using only different service names. Although this example does not use it, particular services require an additional `src` parameter. Lastly, service type `console.svm` requires a `params` parameter which defines what prompt is displayed in the console when it waits for an input from a user during its lifetime. In short, important key points of starting a service are:
+First, we listen to the start of `this` service. Thus, when the router starts, we invoke the start of a service of type `console.svm`, named `cns1`, providing some additional parameters. When the console service starts, in further message passing, we will refer to the console by its assigned name `cns1`. Note that we can start any number of instances of the same service type using only different service names. Although this example does not use it, particular services require an additional `src` parameter. Lastly, service type `console.svm` requires a `params` parameter which defines what prompt is displayed in the console when it waits for an input from a user during its lifetime. The important key points of starting a service are:
 
 - mandatory `service` where we state that we are starting a service
 - mandatory `type` where we denote a type of the service
@@ -191,7 +191,7 @@ To start a new router, we may write:
                 service
                 (type router.svm)
                 (name rt1)
-                (src "rt1.svm")
+                (src "rt1.srv")
             )
         )
     )
@@ -199,13 +199,13 @@ To start a new router, we may write:
 ...
 ```
 
-Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.svm`. Similarly, if some other service we start (like *compute-stateful.svm* or *compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
+Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *compute-stateful.svm* or *compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
 
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
 ### 4 conclusion
 
-In this section, we presented a simple router service for directing messages between other services. Being a service glue element, *router.svm* takes a central role among all the services in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* to perform different tasks of interest.
+In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* services to perform different tasks of interest.
 
 ## C. console.svm
 
@@ -235,15 +235,19 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 ## D. compute-stateful.svm
 
-In computing theory, there are two mainstream branches of programming systems: declarative and imperative. Declarative branches typically abstract from states, providing optimized structures for other forms of computations. However, sometimes, when we may find dealing with states the best thing to do, imperative branches may take a place because dealing with states is what they do the best.
+In computing theory, there are two mainstream branches of programming paradigms: declarative and imperative. Declarative programming typically abstracts from states, providing optimized structures for other forms of computations. However, sometimes, when dealing with states seems the most natural thing to do, imperative programming may be a very good fit because dealing with states is what it does the best. *Compute-stateful.svm* belongs into the category of imperative programming paradigm.
 
-*Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service resemble a sort of finite state machine. Programs are composed of a series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
+*Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service virtual machine resemble a sort of finite state machine. Programs are composed of a series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
 
 Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The  limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with Turing machines model which is known to be the most expressive model of computation.
 
 ### 1. theoretical background
 
-*Compute-stateful.svm* service combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running by this service can be in exactly one of a finite number of states at any given time. The program begins with the `start` state, changes its state during execution, and finally ends with the `stop` state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern. It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by memory cell inputs. As a measure of its completeness, this computing model is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning that it can carry on any kind of computations known to us.
+*Compute-stateful.svm* service virtual machine combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running in this service virtual machine can be in exactly one of a finite number of states at any given time. The program begins with the `start` state, changes its state in controlled manner during the execution, and finally ends with the `stop` state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern.
+
+It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by variable memory cells.
+
+As a measure of its completeness, the computing model used in *compute-stateful.svm* is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning that it can carry on any kind of computations known to us.
 
 #### 1.1. syntax
 
@@ -270,7 +274,7 @@ In addition to the above grammar, user comments have no meaning to the system, b
 
 Word "semantics" is another word for the word "meaning". In this section, we are dealing with an intuitive semantics of *compute-stateful.svm* code. Semantics of the code will be explained using various simplistic examples, describing how the states and memory cells change and what inputs and outputs the whole examples accept and generate.
 
-##### 1.2.1 temporary and permanent data storage
+##### 1.2.1. temporary and permanent data storage
 
 Data in *compute-stateful.svm* is stored in so-called memory cells. Memory cells hold arbitrary complex s-expressions, and can be temporary or permanent. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
 
@@ -459,7 +463,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
 )
 ```
 
-The above example inputs the s-expression of two elements, and outputs them in a swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
+The above example inputs the s-expression of two elements, and outputs them in a swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.srv`.
 
 ##### 1.2.4. modularity
 
@@ -468,7 +472,7 @@ Defining computing streams may become very complex. To tackle this problem, each
 ```
 (
     STATEFUL
-    (IMPORT (NAME swap) (SRC "swap.svm"))
+    (IMPORT (NAME swap) (SRC "swap.srv"))
     (
         MATCH
         (
@@ -491,7 +495,7 @@ Defining computing streams may become very complex. To tackle this problem, each
 )
 ```
 
-The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
+The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.srv` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
 
 ### 2. examples
 
@@ -509,7 +513,7 @@ In this section we exposed basic constructs of *compute-stateful.svm* services. 
 // work in progress //
 ```
 
-*Compute-stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations, using this service, may be suitable to perform automated reasoning tasks.
+*Compute-stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations, using this service virtual machine, may be suitable to perform automated reasoning tasks.
 
 ```
 (
