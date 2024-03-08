@@ -23,7 +23,7 @@ project status:
         - [x] [B.4. conclusion](#b4-conclusion)
     - [x] [C. console.svm](#c-consolesvm)
     - [x] [D. compute-stateful.svm](#d-compute-statefulsvm)
-        - [x] [D.1. theoretical background]()
+        - [x] [D.1. theoretical background](#d1-theoretical-background)
             - [x] [D.1.1. syntax](#d11-syntax)
             - [x] [D.1.2. semantics](#d12-semantics)
                 - [x] [D.1.2.1 temporary and permanent data storage](#d121-temporary-and-permanent-data-storage)
