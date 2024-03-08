@@ -272,7 +272,7 @@ Word "semantics" is another word for the word "meaning". In this section, we are
 
 ##### 1.2.1 temporary and permanent data storage
 
-**temporary data storage**
+###### temporary data storage
 
 Data in *compute-stateful.svm* code is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their data is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
 
@@ -329,7 +329,7 @@ takes no start parameters because of the absence of `INPUT` section in `start` s
 
 Computing processes using only temporary storage are [referentially transparent](https://en.wikipedia.org/wiki/Referential_transparency) from the world outside of the processes.
 
-**permanent data storage**
+###### permanent data storage
 
 Permanent memory cells are noted by `PERM` sections, and they live forever, or until their data is set to `NIL`. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
 
