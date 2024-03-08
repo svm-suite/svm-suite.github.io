@@ -237,9 +237,9 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 In computing theory, there are two mainstream branches of programming systems: declarative and imperative. Declarative branches typically abstract from states, providing optimized structures for other forms of computations. However, sometimes, when we may find dealing with states the best thing to do, imperative branches may take a place because dealing with states is what they do the best.
 
-*Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service resemble a sort of finite state machine. Programs are composed of series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
+*Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service resemble a sort of finite state machine. Programs are composed of a series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
 
-Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The  limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with Turing machines model which is known to be the most expressive model of computation.
+Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The  limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with Turing machines model which is known to be the most expressive model of computation.
 
 ### D.1. theoretical background
 
@@ -247,22 +247,22 @@ Finite state machines which *compute-stateful.svm* appearance is based on, can p
 
 #### D.1.1. syntax
 
-*Compute-stateful.svm* code itself resembles a type of s-expression. S-expressions are consisted of lists of atoms or other s-expressions where lists are surrounded by parenthesis. In the code, the first list element to the left determines a type of a list. There are a few predefined list types used for data computing depicted by the following relaxed kind of [Backus-Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) rules:
+*Compute-stateful.svm* code itself resembles a type of s-expression. S-expressions consist of lists of atoms or other s-expressions where lists are surrounded by parenthesis. In the code, the first list element to the left determines a type of a list. There are a few predefined list types used for data computing depicted by the following relaxed kind of [Backus-Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) rules:
 
 ```
-    <start> := (STATEFUL <statement>+)
+    <start> := (STATEFUL <statement>+)
 <statement> := (COMPUTE <current> <next>)
-  <current> := (CURR (STATE start) (INPUT (DATA <S-EXPR>))?)
-             | (CURR (STATE <ATOM>) (INPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
-     <next> := (NEXT (STATE stop) (OUTPUT (DATA <S-EXPR>))?)
-             | (NEXT (STATE <ATOM>) (OUTPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
-     <cell> := TEMP
-             | PERM
+  <current> := (CURR (STATE start) (INPUT (DATA <S-EXPR>))?)
+             | (CURR (STATE <ATOM>) (INPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
+     <next> := (NEXT (STATE stop) (OUTPUT (DATA <S-EXPR>))?)
+             | (NEXT (STATE <ATOM>) (OUTPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
+     <cell> := TEMP
+             | PERM
 ```
 
 Each `STATE` section holds a name of the state, each `<cell>` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
 
-The above grammar rules defines the syntax of the code. To interpret these grammar rules, we use special symbols: `<...>` for noting identifiers, `... := ...` for expressing assignment, `...+` for one ore more occurrences, `...?` for optional appearance, and `... | ...` for alternation between expressions. All other symbols are considered as parts of the code.
+The above grammar rules define the syntax of the code. To interpret these grammar rules, we use special symbols: `<...>` for noting identifiers, `... := ...` for expressing assignment, `...+` for one more more occurrences, `...?` for optional appearance, and `... | ...` for alternation between expressions. All other symbols are considered as parts of the code.
 
 In addition to the above grammar, user comments have no meaning to the system, but may be descriptive to readers, and may be placed wherever a whitespace is expected. Single line comments begin with `//`, and reach to the end of line. Multiline comments begin with `/*` and end with `*/`, so that everything in between is considered as a comment.
 
@@ -457,7 +457,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
 )
 ```
 
-The above example inputs s-expression of two elements, and outputs them in swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
+The above example inputs the s-expression of two elements, and outputs them in a swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
 
 ##### D.1.2.4. modularity
 
