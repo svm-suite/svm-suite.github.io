@@ -23,11 +23,15 @@ project status:
         - [x] [B.4. conclusion](#b4-conclusion)
     - [x] [C. console.svm](#c-consolesvm)
     - [x] [D. compute-stateful.svm](#d-compute-statefulsvm)
-        - [x] [D.1. temporary and permanent data storage](#d1-temporary-and-permanent-data-storage)
-        - [x] [D.2. pattern matching](#d2-pattern-matching)
-        - [x] [D.3. variables](#d3-variables)
-        - [x] [D.4. modularity](#d4-modularity)
-        - [x] [D.5. conclusion](#d5-conclusion)
+        - [ ] [D.1. theoretical background]()
+            - [ ] [D.1.1. syntax](#d11-syntax)
+            - [ ] [D.1.2. semantics](#d12-semantics)
+                - [x] [D.1.2.1 temporary and permanent data storage](#d121-temporary-and-permanent-data-storage)
+                - [x] [D.1.2.2. pattern matching](#d122-pattern-matching)
+                - [x] [D.1.2.3. variables](#d123-variables)
+                - [x] [D.1.2.4. modularity](#d124-modularity)
+        - [ ] [D.2. examples](#d2-examples)
+        - [ ] [D.3. conclusion](#d3-conclusion)
     - [ ] [E. compute-stateless.svm](#e-compute-statelesssvm)
 
 # SVM Suite instructions
@@ -231,64 +235,46 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 ## D. compute-stateful.svm
 
-*Compute-stateful.svm* is a service virtual machine providing state operations and computing data. This service combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) with memory cell assignment and pattern matching. A program running by this service can be in exactly one of a finite number of states at any given time. The program begins with the `start` state, changes its state during execution, and finally ends with the `stop` state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data if the current memory data matches the given pattern. It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. In nodes definition, beside explicitly pairing nodes, their input and output also define the way they can be mutually connected. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by memory cell inputs and outputs. As a measure of its completeness, this computing model is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning that it can process any kind of computation known to us.
+In computing theory, there are two mainstream branches of programming systems: declarative and imperative. Declarative branches typically abstract from states, providing optimized structures for other forms of computations. However, sometimes, when we may find dealing with states the best thing to do, imperative branches may take a place because dealing with states is what they do the best.
 
-All programs in *compute-stateful.svm* are written by the following pattern:
+*Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service resemble a sort of finite state machine. Programs are composed of series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
+
+Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The  limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with Turing machines model which is known to be the most expressive model of computation.
+
+### D.1. theoretical background
+
+*Compute-stateful.svm* service combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running by this service can be in exactly one of a finite number of states at any given time. The program begins with the `start` state, changes its state during execution, and finally ends with the `stop` state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern. It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by memory cell inputs. As a measure of its completeness, this computing model is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning that it can carry on any kind of computations known to us.
+
+#### D.1.1. syntax
+
+*Compute-stateful.svm* code itself resembles a type of s-expression. S-expressions are consisted of lists of atoms or other s-expressions where lists are surrounded by parenthesis. In the code, the first list element to the left determines a type of a list. There are a few predefined list types used for data computing depicted by the following relaxed kind of [Backus-Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) rules:
 
 ```
-(
-    STATEFUL
-    (
-        COMPUTE
-        (
-            CURRENT
-            (STATE start)
-            (INPUT (DATA ...))
-        )
-        (
-            NEXT
-            (STATE ...)
-            (OUTPUT (TEMP/PERM ...) (DATA ...))
-        )
-    )
-    ...
-    (
-        COMPUTE
-        (
-            CURRENT
-            (STATE ...)
-            (INPUT (TEMP/PERM ...) (DATA ...))
-        )
-        (
-            NEXT
-            (STATE ...)
-            (OUTPUT (TEMP/PERM ...) (DATA ...))
-        )
-    )
-    ...
-    (
-        COMPUTE
-        (
-            CURRENT
-            (STATE ...)
-            (INPUT (TEMP/PERM ...) (DATA ...))
-        )
-        (
-            NEXT
-            (STATE stop)
-            (OUTPUT (DATA ...))
-        )
-    )
-)
+    <start> := (STATEFUL <statement>+)
+<statement> := (COMPUTE <current> <next>)
+  <current> := (CURR (STATE start) (INPUT (DATA <S-EXPR>))?)
+             | (CURR (STATE <ATOM>) (INPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
+     <next> := (NEXT (STATE stop) (OUTPUT (DATA <S-EXPR>))?)
+             | (NEXT (STATE <ATOM>) (OUTPUT (<cell> <ATOM>) (DATA <S-EXPR>))?)
+     <cell> := TEMP
+             | PERM
 ```
 
-We can notice discrete `COMPUTE` steps which pair the current step `STATE` and `INPUT` against the next step `STATE` and `OUTPUT`. `INPUT` and `OUTPUT` sections are optional in any computing step. The `start` and `stop` states can not change memory cells, and can only input and output `DATA`, respectively, defining the current service instance. All the states in between may read and write their `INPUT` and `OUTPUT` data from temporary `TEMP` or permanent `PERM` memory cells. Each `STATE` section holds a name of the state, each `TEMP` or `PERM` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
+Each `STATE` section holds a name of the state, each `<cell>` section holds a name of the memory cell, while each `DATA` section holds a single s-expression.
 
-### D.1. temporary and permanent data storage
+The above grammar rules defines the syntax of the code. To interpret these grammar rules, we use special symbols: `<...>` for noting identifiers, `... := ...` for expressing assignment, `...+` for one ore more occurrences, `...?` for optional appearance, and `... | ...` for alternation between expressions. All other symbols are considered as parts of the code.
+
+In addition to the above grammar, user comments have no meaning to the system, but may be descriptive to readers, and may be placed wherever a whitespace is expected. Single line comments begin with `//`, and reach to the end of line. Multiline comments begin with `/*` and end with `*/`, so that everything in between is considered as a comment.
+
+#### D.1.2. semantics
+
+Word "semantics" is another word for the word "meaning". In this section, we are dealing with an intuitive semantics of *compute-stateful.svm* code. Semantics of the code will be explained using various simplistic examples, describing how the states and memory cells change and what inputs and outputs the whole examples accept and generate.
+
+##### D.1.2.1 temporary and permanent data storage
 
 **temporary data storage**
 
-Data in *compute-stateful.svm* is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their data is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
+Data in *compute-stateful.svm* code is computed using memory cells. Temporary memory cells are noted by `TEMP` sections, and they live from the moment they are created until reaching the `stop` state, or until their data is set to `NIL`. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM.
 
 The next example:
 
@@ -393,7 +379,7 @@ The next example:
 
 is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
 
-### D.2. pattern matching
+##### D.1.2.2. pattern matching
 
 We can also define multiple `COMPUTE` steps with the same `CURRENT` state which may introduce possible branching choices. When the next computing step may land at multiple steps, *compute-stateful.svm* service chooses to select the first available step with the same name, from the top of the code, whose `INPUT` matches against the memory cell contents. Thus, the example:
 
@@ -442,7 +428,7 @@ We can also define multiple `COMPUTE` steps with the same `CURRENT` state which 
 
 outputs the atom `choice two`. Constructs like this may also be useful when we implement loops by employing circular references. In such cases, branching choices may save us from infinite loops.
 
-### D.3. variables
+##### D.1.2.3. variables
 
 Similarly to *router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
 
@@ -473,7 +459,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
 
 The above example inputs s-expression of two elements, and outputs them in swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
 
-### D.4. modularity
+##### D.1.2.4. modularity
 
 Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
 
@@ -505,9 +491,15 @@ Defining computing streams may become very complex. To tackle this problem, each
 
 The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
 
-### D.5. conclusion
+### D.2. examples
 
-In this section we exposed basic constructs of *compute-stateful.svm* services. We only scratched the surface of what such services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
+```
+// work in progress //
+```
+
+### D.3. conclusion
+
+In this section we exposed basic constructs of *compute-stateful.svm* services. Although there are many cases where dealing with states may pose a stumbling stone in writing programs, there are some cases where being able to express states is very desirable. And that is the purpose of *compute-stateful.svm* service virtual machine, to easily express operations with states. Here, we only scratched the surface of what *compute-stateful.svm* services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
 
 ## E. compute-stateless.svm
 
