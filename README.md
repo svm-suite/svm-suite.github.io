@@ -12,7 +12,7 @@ project status:
     [ ] gamma release
 ```
 
-#### TOC
+# TOC
 
 - [ ] [SVM Suite instructions](#svm-suite-instructions)
     - [ ] [A. local installation](#a-local-installation)
