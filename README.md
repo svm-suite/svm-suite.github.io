@@ -17,21 +17,21 @@ project status:
 - [ ] [SVM Suite instructions](#svm-suite-instructions)
     - [ ] [A. local installation](#a-local-installation)
     - [x] [B. router.svm](#b-routersvm)
-        - [x] [B.1. starting and stopping services](#b1-starting-and-stopping-services)
-        - [x] [B.2. passing messages between services](#b2-passing-messages-between-services)
-        - [x] [B.3. modularity](#b3-modularity)
-        - [x] [B.4. conclusion](#b4-conclusion)
+        - [x] [1. starting and stopping services](#1-starting-and-stopping-services)
+        - [x] [2. passing messages between services](#2-passing-messages-between-services)
+        - [x] [3. modularity](#3-modularity)
+        - [x] [4. conclusion](#4-conclusion)
     - [x] [C. console.svm](#c-consolesvm)
     - [x] [D. compute-stateful.svm](#d-compute-statefulsvm)
-        - [x] [D.1. theoretical background](#d1-theoretical-background)
-            - [x] [D.1.1. syntax](#d11-syntax)
-            - [x] [D.1.2. semantics](#d12-semantics)
-                - [x] [D.1.2.1 temporary and permanent data storage](#d121-temporary-and-permanent-data-storage)
-                - [x] [D.1.2.2. pattern matching](#d122-pattern-matching)
-                - [x] [D.1.2.3. variables](#d123-variables)
-                - [x] [D.1.2.4. modularity](#d124-modularity)
-        - [ ] [D.2. examples](#d2-examples)
-        - [x] [D.3. conclusion](#d3-conclusion)
+        - [x] [1. theoretical background](#1-theoretical-background)
+            - [x] [1.1. syntax](#11-syntax)
+            - [x] [1.2. semantics](#12-semantics)
+                - [x] [1.2.1 temporary and permanent data storage](#121-temporary-and-permanent-data-storage)
+                - [x] [1.2.2. pattern matching](#122-pattern-matching)
+                - [x] [1.2.3. variables](#123-variables)
+                - [x] [1.2.4. modularity](#124-modularity)
+        - [ ] [2. examples](#2-examples)
+        - [x] [3. conclusion](#3-conclusion)
     - [ ] [E. compute-stateless.svm](#e-compute-statelesssvm)
 
 # SVM Suite instructions
@@ -71,7 +71,7 @@ The following code pattern would give an insight to what a router code would loo
 
 In this manner, the router directs messages from one service to another. Each `SOURCE` and `TARGET` section hold a service name, while each `DATA` section holds a s-expression.
 
-### B.1. starting and stopping services
+### 1. starting and stopping services
 
 Each service has its lifetime during which it sends or receives messages. Services begin their lifetimes using always active built-in service `start`, while they end using also always active built-in service `stop`. When services start or stop, they emit related messages that can be caught by the router. Given that the router service is already running, in such a way, we can intercept a starting or stopping service named `this` denoting the current router. On interception of such messages, we can start or stop other services, which would be the root point of our service management.
 
@@ -123,7 +123,7 @@ stops service named `cns1` when `this` is being stopped.
 
 To resume, if the above two examples are coded in the same router, they start `cns1` service when the router lifetime begins, and stop it when the router lifetime ends.
 
-### B.2. passing messages between services
+### 2. passing messages between services
 
 When services are up and running, they receive and emit their input and output messages. To direct and pass around these messages, we use the same pattern from the previous examples. For example, we may have started two services of a type `console.svm` named `cns1` and `cns2`. If we wanted to make, say, a chat system out of them, these two services may be paired in a router to output what the other service inputs while users are typing to their interfaces. To begin with the creation of such a system, let's start from a simple indicator of whether the users input a letter `A` into consoles. Such system would contain the following code:
 
@@ -171,7 +171,7 @@ All that is now left to do is to insert some code for starting and stopping serv
 
 Of course, we may use any number of variables in the `DATA` section, and we can name them however we want. Additionally, we may also use the variables in `SOURCE` and `TARGET` sections if we want to parameterize service names we operate on.
 
-### B.3. modularity
+### 3. modularity
 
 To achieve modularity of a router, we may also start other router services from the root one, stacking them in the hierarchical structure. Such modularity may be proven to be useful in more complicated systems where we may want to isolate passing messages of the same sort.
 
@@ -203,7 +203,7 @@ Note the use of `src` parameter. Using this code, we start a router coded in fil
 
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
-### B.4 conclusion
+### 4 conclusion
 
 In this section, we presented a simple router service for directing messages between other services. Being a service glue element, *router.svm* takes a central role among all the services in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* to perform different tasks of interest.
 
@@ -241,11 +241,11 @@ In computing theory, there are two mainstream branches of programming systems: d
 
 Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The  limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with Turing machines model which is known to be the most expressive model of computation.
 
-### D.1. theoretical background
+### 1. theoretical background
 
 *Compute-stateful.svm* service combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running by this service can be in exactly one of a finite number of states at any given time. The program begins with the `start` state, changes its state during execution, and finally ends with the `stop` state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern. It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by memory cell inputs. As a measure of its completeness, this computing model is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning that it can carry on any kind of computations known to us.
 
-#### D.1.1. syntax
+#### 1.1. syntax
 
 *Compute-stateful.svm* code itself resembles a type of s-expression. S-expressions consist of lists of atoms or other s-expressions where lists are surrounded by parenthesis. In the code, the first list element to the left determines a type of a list. There are a few predefined list types used for data computing depicted by the following relaxed kind of [Backus-Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) rules:
 
@@ -266,11 +266,11 @@ The above grammar rules define the syntax of the code. To interpret these gramm
 
 In addition to the above grammar, user comments have no meaning to the system, but may be descriptive to readers, and may be placed wherever a whitespace is expected. Single line comments begin with `//`, and reach to the end of line. Multiline comments begin with `/*` and end with `*/`, so that everything in between is considered as a comment.
 
-#### D.1.2. semantics
+#### 1.2. semantics
 
 Word "semantics" is another word for the word "meaning". In this section, we are dealing with an intuitive semantics of *compute-stateful.svm* code. Semantics of the code will be explained using various simplistic examples, describing how the states and memory cells change and what inputs and outputs the whole examples accept and generate.
 
-##### D.1.2.1 temporary and permanent data storage
+##### 1.2.1 temporary and permanent data storage
 
 **temporary data storage**
 
@@ -379,7 +379,7 @@ The next example:
 
 is analogous to the one in [4.1. temporary data storage](#41-temporary-data-storage). The only difference is that we use permanent storage cells. Such use stores data in the file system while `PERM` sections hold paths to specific files. Relatedly, `perm` sections refer to those files. Permanent data storage introduces referential opaqueness from the outside world of the process.
 
-##### D.1.2.2. pattern matching
+##### 1.2.2. pattern matching
 
 We can also define multiple `COMPUTE` steps with the same `CURRENT` state which may introduce possible branching choices. When the next computing step may land at multiple steps, *compute-stateful.svm* service chooses to select the first available step with the same name, from the top of the code, whose `INPUT` matches against the memory cell contents. Thus, the example:
 
@@ -428,7 +428,7 @@ We can also define multiple `COMPUTE` steps with the same `CURRENT` state which 
 
 outputs the atom `choice two`. Constructs like this may also be useful when we implement loops by employing circular references. In such cases, branching choices may save us from infinite loops.
 
-##### D.1.2.3. variables
+##### 1.2.3. variables
 
 Similarly to *router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
 
@@ -459,7 +459,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
 
 The above example inputs the s-expression of two elements, and outputs them in a swapped position. To reuse it in the following section, let's declare this example as saved in a file `swap.svm`.
 
-##### D.1.2.4. modularity
+##### 1.2.4. modularity
 
 Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
 
@@ -491,13 +491,13 @@ Defining computing streams may become very complex. To tackle this problem, each
 
 The above example also outputs swapped input s-expression of two elements, but now using the `swap` section in output to invoke the `swap.svm` code. Let's just mention that in a similar way, we can also safely import and invoke *compute-stateless.svm* services from the *compute-stateful.svm* services.
 
-### D.2. examples
+### 2. examples
 
 ```
 // work in progress //
 ```
 
-### D.3. conclusion
+### 3. conclusion
 
 In this section we exposed basic constructs of *compute-stateful.svm* services. Although there are many cases where dealing with states may pose a stumbling stone in writing programs, there are some cases where being able to express states is very desirable. And that is the purpose of *compute-stateful.svm* service virtual machine, to easily express operations with states. Here, we only scratched the surface of what *compute-stateful.svm* services are capable of. Since we are dealing with a Turing complete system, we may expect that we are not bound in any way considering the domain of supported computations.
 
