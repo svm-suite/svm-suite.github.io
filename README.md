@@ -13,6 +13,8 @@
                          (PREVIEW DOCUMENT)
 ```
 
+## table of contents
+
 - [SVM SUITE PREVIEW DOCUMENT](#svm-suite-preview-document)
     - [A. LOCAL INSTALLATION (WIP)](#a-local-installation)
     - [B. ROUTER.SVM](#b-routersvm)
