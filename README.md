@@ -1,67 +1,67 @@
-# SVM Suite
-
 ```
-// work in progress //
+ ####   ##     ##  ##     ##       ####           ##    ##
+##  ##  ##     ##  ###   ###      ##  ##                ##
+##       ##   ##   ## ### ##      ##      ##  ##  ##   #####   ####
+ ####    ##   ##   ##  #  ##       ####   ##  ##  ##    ##    ##  ##
+    ##    ## ##    ##     ##          ##  ##  ##  ##    ##    ######
+##  ##     ###     ##     ##      ##  ##  ##  ##  ##    ##    ##   
+ ####       #      ##     ##       ####    ####    ###   ###   ####
 
-project status:
-    [ ] alpha conception
-        [x] initiating the idea
-        [x] theorizing
-        [ ] implementing
-    [ ] beta testing and revising code
-    [ ] gamma release
+           A set of service virtual machines intended for
+         human-computer interaction and automated reasoning
+
+                         (PREVIEW DOCUMENT)
 ```
 
-# TOC
+table of contents:
+- [SVM SUITE PREVIEW DOCUMENT](#svm-suite-preview-document)
+    - [A. LOCAL INSTALLATION (WIP)](#a-local-installation)
+    - [B. ROUTER.SVM](#b-routersvm)
+        - [1. starting and stopping services](#1-starting-and-stopping-services)
+        - [2. passing messages between services](#2-passing-messages-between-services)
+        - [3. modularity](#3-modularity)
+        - [4. afterword](#4-afterword)
+    - [C. CONSOLE.SVM](#c-consolesvm)
+    - [D. COMPUTE-STATEFUL.SVM](#d-compute-statefulsvm)
+        - [1. theoretical background](#1-theoretical-background)
+            - [1.1. syntax](#11-syntax)
+            - [1.2. semantics](#12-semantics)
+                - [1.2.1. temporary and permanent data storage](#121-temporary-and-permanent-data-storage)
+                - [1.2.2. pattern matching](#122-pattern-matching)
+                - [1.2.3. variables](#123-variables)
+                - [1.2.4. modularity](#124-modularity)
+        - [2. examples (WIP)](#2-examples)
+        - [3. afterword](#3-afterword)
+    - [E. COMPUTE-STATELESS.SVM](#e-compute-statelesssvm)
+        - [1. theoretical background](#1-theoretical-background-1)
+            - [1.1. syntax](#11-syntax-1)
+            - [1.2. semantics](#12-semantics-1)
+                - [1.2.1. expressions](#121-expressions)
+                - [1.2.2. rules](#122-rules)
+                - [1.2.3. rule systems](#123-rule-systems)
+                - [1.2.4. meta-rules and typing](#124-meta-rules-and-typing)
+        - [2. examples (WIP)](#2-examples-1)
+        - [3. afterword](#3-afterword-1)
 
-- [ ] [SVM Suite instructions](#svm-suite-instructions)
-    - [ ] [A. local installation](#a-local-installation)
-    - [x] [B. router.svm](#b-routersvm)
-        - [x] [1. starting and stopping services](#1-starting-and-stopping-services)
-        - [x] [2. passing messages between services](#2-passing-messages-between-services)
-        - [x] [3. modularity](#3-modularity)
-        - [x] [4. conclusion](#4-conclusion)
-    - [x] [C. console.svm](#c-consolesvm)
-    - [ ] [D. compute-stateful.svm](#d-compute-statefulsvm)
-        - [x] [1. theoretical background](#1-theoretical-background)
-            - [x] [1.1. syntax](#11-syntax)
-            - [x] [1.2. semantics](#12-semantics)
-                - [x] [1.2.1. temporary and permanent data storage](#121-temporary-and-permanent-data-storage)
-                - [x] [1.2.2. pattern matching](#122-pattern-matching)
-                - [x] [1.2.3. variables](#123-variables)
-                - [x] [1.2.4. modularity](#124-modularity)
-        - [ ] [2. examples](#2-examples)
-        - [x] [3. conclusion](#3-conclusion)
-    - [ ] [E. compute-stateless.svm](#e-compute-statelesssvm)
-        - [x] [1. theoretical background](#1-theoretical-background-1)
-            - [x] [1.1. syntax](#11-syntax-1)
-            - [x] [1.2. semantics](#12-semantics-1)
-                - [x] [1.2.1. expressions](#121-expressions)
-                - [x] [1.2.2. rules](#122-rules)
-                - [x] [1.2.3. rule systems](#123-rule-systems)
-                - [x] [1.2.4. meta-rules and typing](#124-meta-rules-and-typing)
-        - [ ] [2. examples](#2-examples-1)
-        - [x] [3. conclusion](#3-conclusion-1)
-
-# SVM Suite instructions
+# SVM SUITE PREVIEW DOCUMENT
 
 Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for human-computer interaction and automated reasoning. *SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between different services dedicated to perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
 
 Some examples that may be represented as services are RAM, permanent storage, keyboard or mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, operating system, or maybe even enthusiastic self-controlling hardware system driven by artificial intelligence empowered form of existential being.
 
-Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *router.svm* mediates between *console.svm*, *compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future.
+Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *Router.svm* mediates between *Console.svm*, *Compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future.
 
 > Note that all the code and exchanged data in *SVM Suite* services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. Ingenious s-expression form is chosen because of its very convenient properties relating to code related tasks.
 
-## A. local installation
+## A. LOCAL INSTALLATION
 
 ```
 // work in progress //
 ```
 
-## B. router.svm
+## B. ROUTER.SVM
 
-*Router.svm* is intended to be a router between arbitrary pluggable services. It is conceived as a minimalistic, yet powerful service integrator. As a central hub for exchanging messages between different services, the importance of *router.svm* may be considerable in spite of the simplicity of code that may represent a specific router instance.
+*Router.svm* is intended to be a router between arbitrary pluggable services. It is conceived as a minimalistic, yet powerful service integrator. As a central hub for exchanging messages between different services, the importance of *Router.svm* may be considerable in spite of the simplicity of code that may represent a specific router instance.
 
 The following code pattern would give an insight to what a router code would look like:
 
@@ -208,15 +208,15 @@ To start a new router, we may write:
 ...
 ```
 
-Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *compute-stateful.svm* or *compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
+Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *Compute-stateful.svm* or *compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
 
-In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
+In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *Router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
 ### 4 conclusion
 
-In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *console.svm*, *compute-stateful.svm* and *compute-stateless.svm* services to perform different tasks of interest.
+In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *Router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *Console.svm*, *Compute-stateful.svm* and *compute-stateless.svm* services to perform different tasks of interest.
 
-## C. console.svm
+## C. CONSOLE.SVM
 
 *Console.svm* is a simple service virtual machine providing textual console input/output. It consists of a text box with a prompt where the user inputs text. On input, after pressing the <enter> key, the service emits an `input` message with relevant data. Output to the console is managed by sending an `output` message with relevant data to the service. Console service doesn't require any underlying code specific to a particular instance for its functionality.
 
@@ -242,13 +242,13 @@ This code sets the prompt of the console to `user>` label when the console servi
 
 *Console.svm* is intended to be a default input/output interface to *SVM Suite* based applications. In the case of creating a chatbot, beside the basic conversational interface, consoles can be used for monitoring intermediate thought processes, as we may output a stream of thought during the data computing process.
 
-## D. compute-stateful.svm
+## D. COMPUTE-STATEFUL.SVM
 
 In computing theory, there are two mainstream branches of programming paradigms: declarative and imperative. Declarative programming typically abstracts from states, providing optimized structures for other forms of computations. However, sometimes, when dealing with states seems the most natural thing to do, imperative programming may be a very good fit because dealing with states is what it does the best. *Compute-stateful.svm* belongs into the category of imperative programming paradigm.
 
 *Compute-stateful.svm* is a service virtual machine providing computing data using state operations. Programs written in this service virtual machine resemble a sort of finite state machine. Programs are composed of a series of only one kind of statement which performs a discrete compute step in a process of computation. Each statement quotes the current step of the program execution, and points to the next step in execution, thus the order of statements is not relevant. Also, each step may input from or output to some memory cell, thus carrying on the computation. 
 
-Finite state machines which *compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *compute-stateful.svm* model of computation side by side with [Turing machines model](https://en.wikipedia.org/wiki/Turing_machine) which is known to be the most expressive model of computation.
+Finite state machines which *Compute-stateful.svm* appearance is based on, can perform various tasks like driving vending machines, elevators, traffic lights, combination locks, and many others. The limitations of finite state machines to perform only a subset of all possible tasks is surpassed by introducing reading from and writing to arbitrary memory cells during program execution. This places *Compute-stateful.svm* model of computation side by side with [Turing machines model](https://en.wikipedia.org/wiki/Turing_machine) which is known to be the most expressive model of computation.
 
 ### 1. theoretical background
 
@@ -279,7 +279,7 @@ It is possible to draw a directed graph by connecting nodes representing the sta
              | PERM
 ```
 
-The above grammar rules define the syntax of a *compute-stateful.svm* service code. To interpret these grammar rules, we use special symbols: `<...>` for noting identifiers, `... := ...` for expressing assignment, `...+` for one re more occurrences, `...?` for optional appearance, and `... | ...` for alternation between expressions. All other symbols are considered as parts of the code.
+The above grammar rules define the syntax of a *Compute-stateful.svm* service code. To interpret these grammar rules, we use special symbols: `<...>` for noting identifiers, `... := ...` for expressing assignment, `...+` for one re more occurrences, `...?` for optional appearance, and `... | ...` for alternation between expressions. All other symbols are considered as parts of the code.
 
 **Remember** that starting states are always indicated by including `INPUT` section and excluding `<cell>` section within, while stopping states are always indicated by including `OUTPUT` section and excluding `<cell>` section within.
 
@@ -287,11 +287,11 @@ In addition to the above grammar, user comments have no meaning to the system, b
 
 #### 1.2. semantics
 
-Word "[semantics](https://en.wikipedia.org/wiki/Semantics)" is another word for "meaning". In this section, we are dealing with an intuitive semantics of *compute-stateful.svm* code. Semantics of the code will be explained using various simplistic examples, describing how enter and exit the computation, how the states and memory cells change, and what inputs and outputs the whole examples accept and generate.
+Word "[semantics](https://en.wikipedia.org/wiki/Semantics)" is another word for "meaning". In this section, we are dealing with an intuitive semantics of *Compute-stateful.svm* code. Semantics of the code will be explained using various simplistic examples, describing how enter and exit the computation, how the states and memory cells change, and what inputs and outputs the whole examples accept and generate.
 
 ##### 1.2.1. temporary and permanent data storage
 
-Data in *compute-stateful.svm* is stored in so-called memory cells. Memory cells hold arbitrary complex s-expressions, and can be temporary or permanent. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
+Data in *Compute-stateful.svm* is stored in so-called memory cells. Memory cells hold arbitrary complex s-expressions, and can be temporary or permanent. Computing with temporary cells is much faster than computing with permanent cells since temporary cells are typically stored in RAM. Computing with permanent cells is much slower than computing with temporary cells since permanent cells are typically stored on disk drives.
 
 ###### temporary data storage
 
@@ -354,7 +354,7 @@ Computing processes using only temporary storage are [referentially transparent]
 
 ###### permanent data storage
 
-Permanent memory cells are noted by `PERM` sections, and they live from the moment they are created, until their data is set to `NIL`, even between starting and stopping particular *compute-stateful.svm* services.
+Permanent memory cells are noted by `PERM` sections, and they live from the moment they are created, until their data is set to `NIL`, even between starting and stopping particular *Compute-stateful.svm* services.
 
 The next example:
 
@@ -456,7 +456,7 @@ After storing the atom `snd` in the cell `X`, the above example chooses to store
 
 ##### 1.2.3. variables
 
-Similarly to *router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
+Similarly to *Router.svm* services, we may want to make use of variables. In a similar manner, variables are specified using `MATCH` and `VAR` sections:
 
 ```
 (
@@ -487,7 +487,7 @@ This time we are actually making the service takes an input and gives an output.
 
 ##### 1.2.4. modularity
 
-Defining computing streams may become very complex. To tackle this problem, each *compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
+Defining computing streams may become very complex. To tackle this problem, each *Compute-stateful.svm* service may scatter its code in many files and directories. We can then invoke such files by previously declaring them in `IMPORT` sections:
 
 ```
 (
@@ -515,7 +515,7 @@ Defining computing streams may become very complex. To tackle this problem, each
 )
 ```
 
-This example also inputs a pair of elements and outputs them swapped up, only now using the `swap` section in output to invoke the `swap.srv` code. Let's just mention that, in a similar way, we can also safely import and invoke any *compute-stateless.svm* service from the *compute-stateful.svm* services.
+This example also inputs a pair of elements and outputs them swapped up, only now using the `swap` section in output to invoke the `swap.srv` code. Let's just mention that, in a similar way, we can also safely import and invoke any *compute-stateless.svm* service from the *Compute-stateful.svm* services.
 
 ### 2. examples
 
@@ -523,11 +523,11 @@ This example also inputs a pair of elements and outputs them swapped up, only no
 // work in progress //
 ```
 
-### 3. conclusion
+### 3. afterword
 
-In this section we exposed basic constructs of *compute-stateful.svm* services. Although there are many cases where dealing with states may pose a stumbling stone in writing programs, there are some cases where being able to express states is very desirable. And that is the purpose of *compute-stateful.svm* service virtual machine, to easily express operations with states. Here, we only scratched the surface of what *compute-stateful.svm* services are capable of. Since we are dealing with a [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness) system, we may expect that we are not bound in any way considering the domain of supported computations.
+In this section we exposed basic constructs of *Compute-stateful.svm* services. Although there are many cases where dealing with states may pose a stumbling stone in writing programs, there are some cases where being able to express states is very desirable. And that is the purpose of *Compute-stateful.svm* service virtual machine, to easily express operations with states. Here, we only scratched the surface of what *Compute-stateful.svm* services are capable of. Since we are dealing with a [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness) system, we may expect that we are not bound in any way considering the domain of supported computations.
 
-## E. compute-stateless.svm
+## E. COMPUTE-STATELESS.SVM
 
 *Compute-stateless.svm* is planned to be a service virtual machine providing stateless computing operations. Such operations, using this service virtual machine, may be suitable to perform automated reasoning tasks.
 
@@ -1043,10 +1043,6 @@ expects an input in a form of `(orbitsAround <X> <Y>)` where `<X>` and `<Y>` sta
 // work in progress //
 ```
 
-### 3. conclusion
+### 3. afterword
 
 If properly performed, there could be numerous kinds of uses of the *Compute-stateless.svm* inference mechanism. One use may be in editing input in sessions that produce some mathematical, logical, or other kinds of computations, while looping back to editing sessions until we are satisfied with the output. Some other, maybe industrial use may involve compiling a program source code to some assembly target code. In other situations, it is also included that we could form a personal, classical business, or even scientific knowledge base with relational algebra rules, so we can navigate, search, and extract wanted information. Ultimately, data from the knowledge base could mutually interact using on-demand learned inference rules, thus developing the entire logical reasoning system ready to draw complex decisions on general system behavior. And this partial sketch of possible uses is just a tip of the iceberg because with a kind of system like *Compute-stateless.svm*, we are entering a nonexhaustive area of general knowledge computing where only our imagination could be a limit.
-
-```
-// work in progress //
-```
