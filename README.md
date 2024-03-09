@@ -1039,59 +1039,14 @@ expects an input in a form of `(orbitsAround <X> <Y>)` where `<X>` and `<Y>` sta
 
 ### 2. examples
 
-### 3. conclusion
-
-If properly performed, there could be numerous kinds of uses of the *Compute-stateless.svm* inference mechanism. One use may be in editing input in sessions that produce some mathematical, logical, or other kinds of computations, while looping back to editing sessions until we are satisfied with the output. Some other, maybe industrial use may involve compiling a program source code to some assembly target code. In other situations, it is also included that we could form a personal, classical business, or even scientific knowledge base with relational algebra rules, so we can navigate, search, and extract wanted information. Ultimately, data from the knowledge base could mutually interact using on-demand learned inference rules, thus developing the entire logical reasoning system ready to draw complex decisions on general system behavior. And this partial sketch of possible uses is just a tip of the iceberg because with a kind of system like *Compute-stateless.svm*, we are entering a nonexhaustive area of general knowledge computing where only our imagination could be a limit.
-
-
 ```
 // work in progress //
 ```
 
+### 3. conclusion
 
-```
-(
-    STATELESS
-    (
-        RULE
-        (
-            READ
-            
-            (EXP (goes <name> <voice>))
-            
-            (RULE (READ (EXP <name> )) (WRITE (EXP Milo)))
-            (RULE (READ (EXP <name> )) (WRITE (EXP Nora)))
-            (RULE (READ (EXP <voice>)) (WRITE (EXP bark)))
-            (RULE (READ (EXP <voice>)) (WRITE (EXP meow)))
-        )
-        (
-            CHAIN
-            
-            (
-                MATCH
-                (VAR <X>)
-                (RULE (READ (EXP (goes <X> meow))) (WRITE (EXP (isA <X> cat))))
-            )
-            
-            (
-                MATCH
-                (VAR <X>)
-                (RULE (READ (EXP (goes <X> bark))) (WRITE (EXP (isA <X> dog))))
-            )
-        )
-        (
-            WRITE
-            
-            (RULE (READ (EXP Milo)) (WRITE (EXP <name>  )))
-            (RULE (READ (EXP Nora)) (WRITE (EXP <name>  )))
-            (RULE (READ (EXP cat )) (WRITE (EXP <living>)))
-            (RULE (READ (EXP dog )) (WRITE (EXP <living>)))
-            
-            (EXP (isA <name> <living>))
-        )
-    )
-)
-```
+If properly performed, there could be numerous kinds of uses of the *Compute-stateless.svm* inference mechanism. One use may be in editing input in sessions that produce some mathematical, logical, or other kinds of computations, while looping back to editing sessions until we are satisfied with the output. Some other, maybe industrial use may involve compiling a program source code to some assembly target code. In other situations, it is also included that we could form a personal, classical business, or even scientific knowledge base with relational algebra rules, so we can navigate, search, and extract wanted information. Ultimately, data from the knowledge base could mutually interact using on-demand learned inference rules, thus developing the entire logical reasoning system ready to draw complex decisions on general system behavior. And this partial sketch of possible uses is just a tip of the iceberg because with a kind of system like *Compute-stateless.svm*, we are entering a nonexhaustive area of general knowledge computing where only our imagination could be a limit.
+
 
 ```
 // work in progress //
