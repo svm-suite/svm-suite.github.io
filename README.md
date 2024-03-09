@@ -55,7 +55,7 @@ Some examples that may be represented as services are RAM, permanent storage, ke
 
 Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *Router.svm* mediates between *Console.svm*, *Compute-stateful.svm*, and *Compute-stateless.svm*. It is not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future. These service virtual machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration.
 
-> Note that all the code and exchanged data in *SVM Suite* services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. Ingenious s-expression form is chosen because of its very convenient properties relating to code related tasks.
+> Note that all the code and exchanged data in *SVM Suite* services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. The ingenious form of s-expression was chosen for its very convenient properties related to code-related tasks.
 
 ## A. LOCAL INSTALLATION
 
