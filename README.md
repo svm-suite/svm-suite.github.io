@@ -216,7 +216,7 @@ Note the use of `src` parameter. Using this code, we start a router coded in fil
 
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *Router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
-### 4 conclusion
+### 4. afterword
 
 In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *Router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *Console.svm*, *Compute-stateful.svm* and *compute-stateless.svm* services to perform different tasks of interest.
 
