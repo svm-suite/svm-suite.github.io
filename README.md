@@ -18,7 +18,7 @@
 
 ## table of contents
 
-- [SVM SUITE PREVIEW DOCUMENT](#svm-suite-preview-document)
+- [SVM Suite preview document](#svm-suite-preview-document)
     - [A. LOCAL INSTALLATION (WIP)](#a-local-installation)
     - [B. ROUTER.SVM](#b-routersvm)
         - [1. starting and stopping services](#1-starting-and-stopping-services)
@@ -47,7 +47,7 @@
         - [2. examples (WIP)](#2-examples-1)
         - [3. afterword](#3-afterword-1)
 
-# SVM SUITE PREVIEW DOCUMENT
+# SVM Suite preview document
 
 Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for human-computer interaction and automated reasoning. *SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between different services dedicated to perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
 
