@@ -22,7 +22,7 @@ project status:
         - [x] [3. modularity](#3-modularity)
         - [x] [4. conclusion](#4-conclusion)
     - [x] [C. console.svm](#c-consolesvm)
-    - [x] [D. compute-stateful.svm](#d-compute-statefulsvm)
+    - [ ] [D. compute-stateful.svm](#d-compute-statefulsvm)
         - [x] [1. theoretical background](#1-theoretical-background)
             - [x] [1.1. syntax](#11-syntax)
             - [x] [1.2. semantics](#12-semantics)
@@ -32,7 +32,7 @@ project status:
                 - [x] [1.2.4. modularity](#124-modularity)
         - [ ] [2. examples](#2-examples)
         - [x] [3. conclusion](#3-conclusion)
-    - [x] [E. compute-stateless.svm](#e-compute-statelesssvm)
+    - [ ] [E. compute-stateless.svm](#e-compute-statelesssvm)
         - [x] [1. theoretical background](#1-theoretical-background-1)
             - [x] [1.1. syntax](#11-syntax-1)
             - [x] [1.2. semantics](#12-semantics-1)
@@ -1046,7 +1046,6 @@ expects an input in a form of `(orbitsAround <X> <Y>)` where `<X>` and `<Y>` sta
 ### 3. conclusion
 
 If properly performed, there could be numerous kinds of uses of the *Compute-stateless.svm* inference mechanism. One use may be in editing input in sessions that produce some mathematical, logical, or other kinds of computations, while looping back to editing sessions until we are satisfied with the output. Some other, maybe industrial use may involve compiling a program source code to some assembly target code. In other situations, it is also included that we could form a personal, classical business, or even scientific knowledge base with relational algebra rules, so we can navigate, search, and extract wanted information. Ultimately, data from the knowledge base could mutually interact using on-demand learned inference rules, thus developing the entire logical reasoning system ready to draw complex decisions on general system behavior. And this partial sketch of possible uses is just a tip of the iceberg because with a kind of system like *Compute-stateless.svm*, we are entering a nonexhaustive area of general knowledge computing where only our imagination could be a limit.
-
 
 ```
 // work in progress //
