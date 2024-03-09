@@ -53,7 +53,7 @@ Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a p
 
 Some examples that may be represented as services are RAM, permanent storage, keyboard or mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, operating system, or maybe even enthusiastic self-controlling hardware system driven by artificial intelligence empowered form of existential being.
 
-Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *Router.svm* mediates between *Console.svm*, *Compute-stateful.svm*, and *compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future.
+Minimal viable product of *SVM Suite* includes four service virtual machines. Central, *Router.svm* mediates between *Console.svm*, *Compute-stateful.svm*, and *Compute-stateless.svm*. These virtual service machines should be just about enough to establish meaningful communication between human and computer, guided by your software inspiration. It is also not excluded that *SVM Suite* would be enriched by sound, vision, or other similar service virtual machines in the future.
 
 > Note that all the code and exchanged data in *SVM Suite* services is written in [s-expression](https://en.wikipedia.org/wiki/S-expression) form borrowed from [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) family of programming languages. Ingenious s-expression form is chosen because of its very convenient properties relating to code related tasks.
 
@@ -212,13 +212,13 @@ To start a new router, we may write:
 ...
 ```
 
-Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *Compute-stateful.svm* or *compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
+Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *Compute-stateful.svm* or *Compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
 
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *Router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
 ### 4. afterword
 
-In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *Router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *Console.svm*, *Compute-stateful.svm* and *compute-stateless.svm* services to perform different tasks of interest.
+In this section, we presented a simple router service vitual machine for directing messages between services. Being a service glue element, *Router.svm* takes a central role among all the service virtual machines in *SVM Suite*. Provided with simple modularity, one may find it easy to imagine a specific system of routers coordinating between *Console.svm*, *Compute-stateful.svm* and *Compute-stateless.svm* services to perform different tasks of interest.
 
 ## C. CONSOLE.SVM
 
@@ -519,7 +519,7 @@ Defining computing streams may become very complex. To tackle this problem, each
 )
 ```
 
-This example also inputs a pair of elements and outputs them swapped up, only now using the `swap` section in output to invoke the `swap.srv` code. Let's just mention that, in a similar way, we can also safely import and invoke any *compute-stateless.svm* service from the *Compute-stateful.svm* services.
+This example also inputs a pair of elements and outputs them swapped up, only now using the `swap` section in output to invoke the `swap.srv` code. Let's just mention that, in a similar way, we can also safely import and invoke any *Compute-stateless.svm* service from the *Compute-stateful.svm* services.
 
 ### 2. examples
 
