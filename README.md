@@ -464,7 +464,7 @@ Similarly to *router.svm* services, we may want to make use of variables. In a s
     (
         MATCH
         (
-            (VAR <X>)
+            (VAR <X> <Y>)
             (
                 COMPUTE
                 (
