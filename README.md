@@ -180,7 +180,7 @@ Note how we use data parameters `input` and `output` specific to console instanc
 ...
 ```
 
-All that is now left to do is to insert some code for starting and stopping services we learned from the previous section, and we have a fully functioning chat system between two instances of consoles.
+All that is now left to do is to insert some code for starting and stopping services we learned from the previous section, and we have a fully functional chat system between two instances of consoles.
 
 Of course, we may use any number of variables in the `EXP` section, and we can name them however we want. Additionally, we may also use the variables in `SOURCE` and `TARGET` sections if we want to parameterize service names we operate on.
 
