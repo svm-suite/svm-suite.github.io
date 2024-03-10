@@ -212,7 +212,7 @@ To start a new router, we may write:
 ...
 ```
 
-Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like *Compute-stateful.svm* or *Compute-stateless.svm*) depends on a particular code, we use the same `src` parameter to specify the code file.
+Note the use of `src` parameter. Using this code, we start a router coded in file `rt1.srv`. Similarly, if some other service we start (like `compute-stateful.svm` or `compute-stateless.svm`) depends on a particular code, we use the same `src` parameter to specify the code file.
 
 In a direction of modularity, we introduce two more built-in services, source `input` and target `output`. Using them, we make *Router.svm* comply with essential service input/output definition, and we are finally able to pass messages between different routers from a parent node, thus making use of their modularity.
 
