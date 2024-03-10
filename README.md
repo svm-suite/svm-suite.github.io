@@ -82,7 +82,7 @@ The following code pattern would give an insight to what a router code would loo
 )
 ```
 
-In this manner, the router directs messages from one service to another. Each `SOURCE` and `TARGET` section hold a service name, while each `EXP` section holds a s-expression.
+In this manner, the router directs messages from one service to another. Each `SOURCE` and `TARGET` section hold a service name, while each `EXP` section holds exchanged data.
 
 ### 1. starting and stopping services
 
