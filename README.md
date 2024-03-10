@@ -256,7 +256,7 @@ Finite state machines which *Compute-stateful.svm* appearance is based on, can p
 
 ### 1. theoretical background
 
-*Compute-stateful.svm* service virtual machine combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running in this service virtual machine can be in exactly one of a finite number of states at any given time. The program begins with a starting state, changes its state in controlled manner during the execution, and finally ends with a stopping state. As the state changes, the program inputs from and outputs to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern.
+*Compute-stateful.svm* service virtual machine combines a kind of deterministic [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) model with memory cell assignment and pattern matching. A program running in this service virtual machine can be in exactly one of a finite number of states at any given time. The program begins with a starting state, changes its state in controlled manner during the execution, and finally ends with a stopping state. As the state changes, the program inputs from and outputs data to given temporary or permanent memory cells, thus computing new memory data when the current memory data matches the given pattern.
 
 It is possible to draw a directed graph by connecting nodes representing the states, while lines between nodes associate to arbitrary memory cell input and output. Specific nodes may also connect in a cyclic manner, thus forming loops controlled by variable memory cells.
 
