@@ -49,7 +49,9 @@
 
 # SVM Suite preview document
 
-Name *SVM Suite* stands for Service Virtual Machine Suite, and it represents a programming framework intended for human-computer interaction and automated reasoning. *SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between different services dedicated to perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
+Name *SVM Suite* stands for *Service Virtual Machine Suite*, and it represents a programming framework intended for human-computer interaction and automated reasoning. It is primarily intended for symbolic artificial intelligence programming, but it can also be used for other purposes.
+
+*SVM Suite* includes a set of service virtual machines built on principles of service oriented programming ([SOP](https://en.wikipedia.org/wiki/Service-oriented_programming)) paradigm. SOP paradigm clearly distincts between different services dedicated to perform given tasks. Such services communicate between each other by passing messages. Benefits of this approach to programming is high modularity needed for code reuse, high agility in process of code development, and granular independence between services that can be invoked parallelly in a multitasking environment.
 
 Some examples that may be represented as services are RAM, permanent storage, keyboard or mouse. Other, more abstract examples may embed higher or lower level computing platforms. By composing these kinds of services together, depending on what the services are, we may build a whole system in the role of programming library, computer application, a sort of operating system, or maybe even an advanced self-controlling system driven by artificial intelligence.
 
