@@ -1,19 +1,19 @@
 ```
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-.                                                                           .
-.   #####   ##     ##  ##     ##        #####           ##    ##            .
-.  ##   ##  ##     ##  ###   ###       ##   ##                ##            .
-.  ##        ##   ##   ## ### ##       ##       ##  ##  ##  ######   ####   .
-.   #####    ##   ##   ##  #  ##        #####   ##  ##  ##    ##    ##  ##  .
-.       ##    ## ##    ##     ##            ##  ##  ##  ##    ##    ######  .
-.  ##   ##     ###     ##     ##       ##   ##  ##  ##  ##    ##    ##      .
-.   #####       #      ##     ##        #####    ####    ###   ###   ####   .
-.                                                                           .
-.              A set of service virtual machines intended for               .
-.            human-computer interaction and automated reasoning             .
-.                                                                           .
-.                            (PREVIEW DOCUMENT)                             .
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+.                                                                       .
+.   #####   ##   ##  ##   ##        #####           ##    ##            .
+.  ##   ##  ##   ##  ### ###       ##   ##                ##            .
+.  ##       ##   ##  ## # ##       ##       ##  ##  ##  ######   ####   .
+.   #####   ##   ##  ##   ##        #####   ##  ##  ##    ##    ##  ##  .
+.       ##   ## ##   ##   ##            ##  ##  ##  ##    ##    ######  .
+.  ##   ##    ###    ##   ##       ##   ##  ##  ##  ##    ##    ##      .
+.   #####      #     ##   ##        #####    ####    ###   ###   ####   .
+.                                                                       .
+.            A set of service virtual machines intended for             .
+.          human-computer interaction and automated reasoning           .
+.                                                                       .
+.                          (PREVIEW DOCUMENT)                           .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 ```
 
 ## table of contents
@@ -226,7 +226,7 @@ In this section, we presented a simple router service vitual machine for directi
 
 To see initial examples of using consoles, please refer to the [B. ROUTER.SVM] section.
 
-During a console service runtime, it is possible to change its prompt label from router service by sending it a `prompt` message like in the following example:
+During a console service runtime, it is possible to change its prompt label from a router service by sending it a `prompt` message like in the following example:
 
 ```
 ...
@@ -271,13 +271,11 @@ It is possible to draw a directed graph by connecting nodes representing the sta
 
   <current> := (CURR (STATE <ATOM>) <input>?)
   
-    <input> := (INPUT (EXP <S-EXPR>))
-             | (INPUT (<cell> <ATOM>) (EXP <S-EXPR>))
+    <input> := (INPUT (<cell> <ATOM>)? (EXP <S-EXPR>))
 
      <next> := (NEXT (STATE <ATOM>) <output>?)
 
-   <output> := (OUTPUT (EXP <S-EXPR>))
-             | (OUTPUT (<cell> <ATOM>) (EXP <S-EXPR>))
+   <output> := (OUTPUT (<cell> <ATOM>)? (EXP <S-EXPR>))
 
      <cell> := TEMP
              | PERM
